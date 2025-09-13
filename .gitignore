@@ -1,0 +1,5 @@
+back/.env
+
+back/__pycache__/
+back/*/__pycache__/
+back/*/*/__pycache__/   
