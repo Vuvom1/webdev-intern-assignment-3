@@ -18,8 +18,8 @@ services:
       - .:/app
     ports:
       - "8000:8000"
-    environment:
-      - SQLALCHEMY_DATABASE_URL=postgresql://postgres:password@db:5432/postgres
+    env_file:
+      - .env.docker
     depends_on:
       - db
 volumes:
