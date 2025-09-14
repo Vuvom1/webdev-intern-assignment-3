@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import axiosInstance from '../axios/axiosInstance';
 import { API_URLS } from '../constants/apiUrl';
