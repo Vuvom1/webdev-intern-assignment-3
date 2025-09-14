@@ -32,7 +32,7 @@ function transformData(data) {
   });
 }
 
-const Report = () => {
+export default function Report() {
   const [chartData, setChartData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
@@ -122,4 +122,3 @@ function getColor(sub) {
   return colors[SUBJECTS.indexOf(sub) % colors.length];
 }
 
-export default Report;

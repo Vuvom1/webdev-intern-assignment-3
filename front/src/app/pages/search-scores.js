@@ -2,7 +2,7 @@ import React from 'react';
 import axiosInstance from '../axios/axiosInstance';
 import { API_URLS } from '../constants/apiUrl';
 
-const SearchScores = () => {
+export default function SearchScores() {
   const [sbd, setSbd] = React.useState('');
   const [result, setResult] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -62,5 +62,3 @@ const SearchScores = () => {
     </div>
   );
 };
-
-export default SearchScores;

@@ -1,40 +1,24 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import React from 'react';
+import { BrowserRouter, Route, Routes} from 'react-router';
 import Layout from './components/Layout';
-import SearchScores from './pages/search-scores';
 import Dashboard from './pages/dashboard';
 import Report from './pages/report';
+import SearchScores from './pages/search-scores';
 
-export default function AppRouter() {
-  return (
-    <Router>
-      <Routes>
-        <Route
-          path="/dashboard"
-          element={
-            <Layout>
-              <Dashboard />
-            </Layout>
-          }
-        />
-        <Route
-          path="/search-scores"
-          element={
-            <Layout>
-              <SearchScores />
-            </Layout>
-          }
-        />
-        <Route
-          path="/report"
-          element={
-            <Layout>
-              <Report />
-            </Layout>
-          }
-        />
-      </Routes>
-    </Router>
-  );
-}
+const AppRouter = () => {
+	return (
+		<BrowserRouter>
+			<Layout>
+				<Routes>
+					<Route path="/" element={<Dashboard />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/report" element={<Report />} />
+					<Route path="/search-scores" element={<SearchScores />} />
+				</Routes>
+			</Layout>
+		</BrowserRouter>
+	);
+};
+
+export default AppRouter;
