@@ -1,4 +1,3 @@
-
 import csv
 from sqlalchemy.orm import Session
 from models.models import StudentScore
@@ -7,10 +6,15 @@ class CSVImporter:
     def __init__(self, db: Session):
         self.db = db
 
-    def import_csv_to_db(self, csv_path: str):
+    def import_csv_to_db(self, csv_path: str, batch_size: int = 10000):
+        # Count total rows for progress
+        with open(csv_path, newline='', encoding='utf-8') as csvfile:
+            total = sum(1 for _ in csvfile) - 1  # subtract header
+
         with open(csv_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.DictReader(csvfile)
-            for row in reader:
+            batch = []
+            for idx, row in enumerate(reader, start=1):
                 student = StudentScore(
                     sbd=row.get('sbd'),
                     toan=self.try_parse_float(row.get('toan')),
@@ -24,8 +28,13 @@ class CSVImporter:
                     gdcd=self.try_parse_float(row.get('gdcd')),
                     ma_ngoai_ngu=row.get('ma_ngoai_ngu')
                 )
-                self.db.merge(student)
-            self.db.commit()
+                batch.append(student)
+                if len(batch) == batch_size or idx == total:
+                    self.db.bulk_save_objects(batch)
+                    self.db.commit()
+                    batch.clear()
+                    print(f"Seeding progress: {idx}/{total} ({(idx/total)*100:.2f}%)")
+        print("Seeding completed.")
 
     @staticmethod
     def try_parse_float(value):

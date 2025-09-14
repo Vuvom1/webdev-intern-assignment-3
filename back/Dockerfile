@@ -20,5 +20,5 @@ EXPOSE 8000
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Run the app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the app with environment variables from .env
+CMD ["/bin/sh", "-c", "export $(grep -v '^#' .env | xargs) && uvicorn main:app --host 0.0.0.0 --port 8000"]

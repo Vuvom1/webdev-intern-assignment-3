@@ -1,5 +1,13 @@
 back/.env
+back/.env.docker
 
 back/__pycache__/
 back/*/__pycache__/
-back/*/*/__pycache__/   
+back/*/*/__pycache__/  
+
+front/.env
+front/node_modules/
+front/.next/
+front/out/
+front/build/
+front/src/app/pages/api/

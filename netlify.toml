@@ -1,0 +1,18 @@
+[build]
+  base = "front"
+  publish = "out"
+  command = "npm install && npm run build"
+
+[build.environment]
+  NEXT_PUBLIC_API_BASE_URL = "https://webdev-intern-assignment-3-icze.onrender.com/api"
+
+[dev]
+  command = "npm run dev"
+  targetPort = 3000
+  port = 8888
+  framework = "next"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
